@@ -165,7 +165,9 @@ build {
  provisioner "ansible" {
    playbook_file = "./ansible/playbook.yml"
    user          = "ubuntu"
-   ansible_ssh_extra_args = ["-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa"]
+   ansible_ssh_extra_args = ["-o HostKeyAlgorithms=+ssh-rsa]
+
+  //  ansible_ssh_extra_args = ["-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa"]
   //  extra_arguments = ["-vvv"]
  }
 }
