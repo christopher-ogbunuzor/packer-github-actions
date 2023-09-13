@@ -101,7 +101,7 @@
       update_cache: yes
   - name: Install the packages
     apt:
-      name: ""
+      name: "{{ item }}"
       state: present
-    loop: ""
+    loop: "{{ packages }}"
 
