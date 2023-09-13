@@ -18,18 +18,6 @@ source "amazon-ebs" "ubuntu-lts" {
 }
 
 build {
-  # HCP Packer settings
-  hcp_packer_registry {
-    bucket_name = "learn-packer-github-actions"
-    description = <<EOT
-This is an image for HashiCups.
-    EOT
-
-    bucket_labels = {
-      "hashicorp-learn" = "learn-packer-github-actions",
-    }
-  }
-
   sources = [
     "source.amazon-ebs.ubuntu-lts",
   ]
