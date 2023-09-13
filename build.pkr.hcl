@@ -149,7 +149,7 @@ packer {
  }
 }
 source "amazon-ebs" "custom-ami" {
- ami_name      = "packer-custom-ami"
+ ami_name      = "packer-custom-ami2"
  instance_type = "t2.micro"
  region        = "us-east-1"
  source_ami    = "ami-08c40ec9ead489470"
