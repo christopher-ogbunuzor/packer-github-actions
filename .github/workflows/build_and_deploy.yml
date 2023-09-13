@@ -47,7 +47,7 @@ jobs:
       - name: Packer Init
         run: packer init .
 
-      - name: Packer Build - Branches
+      - name: Packer Build
         if: "startsWith(github.ref, 'refs/heads/')"
         run: packer build .
 
