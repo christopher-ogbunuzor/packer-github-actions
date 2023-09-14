@@ -153,6 +153,9 @@ packer {
 //   default = timestamp()
 // }
 
+// PS: Getting timestamp as variable does not work
+// use locals instead
+
 locals {
   packerstarttime = formatdate("YYYY-MM-DD-hhmm", timestamp())
   # Also here I believe naming this variable `buildtime` could lead to 
