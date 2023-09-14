@@ -6,6 +6,8 @@ learn-packer.pub
 **/.terraform/*
 terraform.tfstate
 terraform.tfstate.backup
+.terraform.lock.hcl
+
 
 # .tfstate files
 *.tfstate
