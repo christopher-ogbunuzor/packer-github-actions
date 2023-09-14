@@ -44,10 +44,10 @@ jobs:
       - name: Authenticate with AWS
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::708398767885:role/github_oidc
-          role-session-name: github_oidc_role_session
-          aws-region: ${{ env.AWS_REGION }}
-          # aws-region: ${{ vars.AWS_REGION }}
+          role-to-assume: arn:aws:iam::708398767885:role/github_OIDC_new
+          role-session-name: new_github_oidc_role_session
+          # aws-region: ${{ env.AWS_REGION }}
+          aws-region: ${{ vars.AWS_REGION }}
 
       - name: Packer Init
         run: packer init .
@@ -82,10 +82,10 @@ jobs:
       - name: Authenticate with AWS
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::708398767885:role/github_oidc
-          role-session-name: github_oidc_role_session
-          aws-region: ${{ env.AWS_REGION }}
-          # aws-region: ${{ vars.AWS_REGION }}
+          role-to-assume: arn:aws:iam::708398767885:role/github_OIDC_new
+          role-session-name: new_github_oidc_role_session
+          # aws-region: ${{ env.AWS_REGION }}
+          aws-region: ${{ vars.AWS_REGION }}
 
       - name: Terraform setup
         uses: hashicorp/setup-terraform@v1
