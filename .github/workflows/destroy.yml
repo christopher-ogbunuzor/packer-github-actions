@@ -1,0 +1,51 @@
+---
+name: Destroy AWS resources
+on:
+  workflow_dispatch:
+    inputs:
+      auto_approve:
+        description: 'Auto approve and apply'
+        required: true
+        default: false
+        type: boolean
+  # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request
+  # https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads?actionType=edited#pull_request
+  
+permissions:
+  contents: read
+  id-token: write
+  # pull-requests: write     # NO PR needed
+  # issues: write       # Not needed
+
+jobs:
+  terraform-destryo:
+    name: Terraform Destroy
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: terraform
+    environment: test
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Authenticate with AWS
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::708398767885:role/github_oidc
+          role-session-name: github_oidc_role_session
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Terraform setup
+        uses: hashicorp/setup-terraform@v1
+        
+      - name: Init
+        id: init
+        run: terraform init
+
+      - name: Terraform destroy
+        if: ${{ github.event.inputs.auto_approve }}
+        id: destroy
+        run: terraform destroy -auto-approve -input=false 
+    

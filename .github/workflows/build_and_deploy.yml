@@ -14,7 +14,10 @@ env:
   HCP_PROJECT_ID: ${{ secrets.HCP_PROJECT_ID }}
   HCP_ORGANIZATION_ID: ${{ secrets.HCP_ORGANIZATION_ID }}
   HCP_BUCKET_NAME: "learn-packer-github-actions"
-  AWS_REGION : "us-east-1"
+
+  # AWS_REGION : "us-east-1" 
+  # NO NEED FOR 'AWS_REGION' AS I HAVE SPECIFIED 
+  # THIS IN GITHUB ENVIRONMENT FOR THIS REPO
 
 permissions:
   id-token: write   # This is required for requesting the JWT
@@ -25,6 +28,7 @@ jobs:
   Packer_build_AMI_Job: 
     name: Packer_build_AMI_Job
     runs-on: ubuntu-latest
+    environment: test
     outputs:
       iteration_id: ${{ steps.hcp.outputs.iteration_id }}
     steps:
@@ -67,6 +71,7 @@ jobs:
     name: Terraform_job
     needs: ["Packer_build_AMI_Job"]
     runs-on: ubuntu-latest
+    environment: test
     defaults:
       run:
         working-directory: terraform
