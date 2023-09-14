@@ -47,7 +47,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::708398767885:role/github_oidc
           role-session-name: github_oidc_role_session
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: ${{ vars.AWS_REGION }}
 
       - name: Packer Init
         run: packer init .
@@ -84,7 +84,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::708398767885:role/github_oidc
           role-session-name: github_oidc_role_session
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: ${{ vars.AWS_REGION }}
 
       - name: Terraform setup
         uses: hashicorp/setup-terraform@v1
@@ -102,11 +102,6 @@ jobs:
         id: apply
         run: terraform apply --auto-approve
         continue-on-error: false
-
-      # - name: Destroy
-      #   id: destroy
-      #   run: terraform destroy --auto-approve
-      #   continue-on-error: false
 
 
      
