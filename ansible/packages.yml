@@ -2,6 +2,5 @@ packages:
  - curl
  - wget
  - git
- - openjdk-8-jre-headless
- - make
+
 
