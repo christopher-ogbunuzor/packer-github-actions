@@ -6,7 +6,7 @@ on:
     branches:
       # - "development"
       # - "staging"
-      - "main"
+      - "main" 
 
 env:
   HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
