@@ -149,12 +149,18 @@ packer {
  }
 }
 
-variable "timestamp" {
-  default = timestamp()
+// variable "timestamp" {
+//   default = timestamp()
+// }
+
+locals {
+  packerstarttime = formatdate("YYYY-MM-DD-hhmm", timestamp())
+  # Also here I believe naming this variable `buildtime` could lead to 
+  # confusion mainly because this is evaluated a 'parsing-time'.
 }
 
 source "amazon-ebs" "custom-ami" {
- ami_name      = "packer-custom-ami-${var.timestamp}"
+ ami_name      = "packer-custom-ami-${local.packerstarttime}"
  instance_type = "t2.micro"
  region        = "us-east-1"
  source_ami    = "ami-08c40ec9ead489470"
