@@ -21,7 +21,6 @@ jobs:
   terraform-destryo:
     name: Terraform Destroy
     runs-on: ubuntu-latest
-    environment: test
     defaults:
       run:
         working-directory: terraform
