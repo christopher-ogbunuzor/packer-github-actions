@@ -14,8 +14,7 @@ env:
   HCP_PROJECT_ID: ${{ secrets.HCP_PROJECT_ID }}
   HCP_ORGANIZATION_ID: ${{ secrets.HCP_ORGANIZATION_ID }}
   HCP_BUCKET_NAME: "learn-packer-github-actions"
-
-  # AWS_REGION : "us-east-1" 
+  AWS_REGION : "us-east-1" 
   # NO NEED FOR 'AWS_REGION' AS I HAVE SPECIFIED 
   # THIS IN GITHUB ENVIRONMENT FOR THIS REPO
 
@@ -47,7 +46,8 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::708398767885:role/github_oidc
           role-session-name: github_oidc_role_session
-          aws-region: ${{ vars.AWS_REGION }}
+          aws-region: ${{ env.AWS_REGION }}
+          # aws-region: ${{ vars.AWS_REGION }}
 
       - name: Packer Init
         run: packer init .
@@ -84,7 +84,8 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::708398767885:role/github_oidc
           role-session-name: github_oidc_role_session
-          aws-region: ${{ vars.AWS_REGION }}
+          aws-region: ${{ env.AWS_REGION }}
+          # aws-region: ${{ vars.AWS_REGION }}
 
       - name: Terraform setup
         uses: hashicorp/setup-terraform@v1
