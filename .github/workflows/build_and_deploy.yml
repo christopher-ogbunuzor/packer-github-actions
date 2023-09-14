@@ -14,6 +14,7 @@ env:
   HCP_PROJECT_ID: ${{ secrets.HCP_PROJECT_ID }}
   HCP_ORGANIZATION_ID: ${{ secrets.HCP_ORGANIZATION_ID }}
   HCP_BUCKET_NAME: "learn-packer-github-actions"
+  AWS_REGION : "us-east-1"
 
 permissions:
   id-token: write   # This is required for requesting the JWT
@@ -42,7 +43,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::708398767885:role/github_oidc
           role-session-name: github_oidc_role_session
-          aws-region: us-east-1
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Packer Init
         run: packer init .
@@ -75,7 +76,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::708398767885:role/github_oidc
           role-session-name: github_oidc_role_session
-          # aws-region: ${{ env.AWS_REGION }}
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Terraform setup
         uses: hashicorp/setup-terraform@v1
@@ -94,14 +95,10 @@ jobs:
         run: terraform apply --auto-approve
         continue-on-error: false
 
-      - name: Destroy
-        id: destroy
-        run: terraform destroy --auto-approve
-        continue-on-error: false
+      # - name: Destroy
+      #   id: destroy
+      #   run: terraform destroy --auto-approve
+      #   continue-on-error: false
 
 
-      - name: Create and set channel
-        working-directory: .github/scripts
-        run: |
-          channel_name=$( echo ${{github.ref_name}} | sed 's/\./-/g')
-          ./create_channel_iteration.sh $HCP_BUCKET_NAME $channel_name "${{ needs.build-image.outputs.iteration_id }}"
+     
